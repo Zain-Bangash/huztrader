@@ -92,8 +92,8 @@ export function AdminCarForm({ car, mode }: AdminCarFormProps) {
         const err = await res.json()
         throw new Error(err.error ?? 'Failed to save')
       }
-      router.push('/admin/cars')
       router.refresh()
+      router.push('/admin/cars')
     } catch (err: unknown) {
       setError(err instanceof Error ? err.message : 'Failed to save car')
     } finally {

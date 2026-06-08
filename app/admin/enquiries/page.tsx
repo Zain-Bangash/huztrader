@@ -4,6 +4,7 @@ import { Mail, Phone, MessageSquare } from 'lucide-react'
 import type { Metadata } from 'next'
 import type { Enquiry } from '@/lib/types'
 
+export const dynamic = 'force-dynamic'
 export const metadata: Metadata = { title: 'Admin — Enquiries' }
 
 async function getEnquiries() {

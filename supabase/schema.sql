@@ -82,8 +82,32 @@ CREATE POLICY "Admins can read enquiries"
   ON enquiries FOR SELECT USING (auth.role() = 'service_role');
 
 -- ============================================================
--- Storage Bucket (run separately if needed)
+-- Storage Bucket + Policies
 -- ============================================================
 -- In Supabase Dashboard → Storage → Create bucket named: car-images
 -- Set it to PUBLIC so image URLs work without auth
 -- INSERT INTO storage.buckets (id, name, public) VALUES ('car-images', 'car-images', true);
+
+-- Allow authenticated users (admin) to upload images
+CREATE POLICY "Authenticated users can upload car images"
+  ON storage.objects FOR INSERT
+  TO authenticated
+  WITH CHECK (bucket_id = 'car-images');
+
+-- Allow authenticated users to update/replace images
+CREATE POLICY "Authenticated users can update car images"
+  ON storage.objects FOR UPDATE
+  TO authenticated
+  USING (bucket_id = 'car-images');
+
+-- Allow authenticated users to delete images
+CREATE POLICY "Authenticated users can delete car images"
+  ON storage.objects FOR DELETE
+  TO authenticated
+  USING (bucket_id = 'car-images');
+
+-- Allow public to read/view images (needed for public URLs to work)
+CREATE POLICY "Car images are publicly accessible"
+  ON storage.objects FOR SELECT
+  TO public
+  USING (bucket_id = 'car-images');

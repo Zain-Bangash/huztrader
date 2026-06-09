@@ -12,7 +12,6 @@ async function getFeaturedCars(): Promise<CarType[]> {
       .from('cars')
       .select('*')
       .eq('status', 'for_sale')
-      .eq('is_import', false)
       .order('created_at', { ascending: false })
       .limit(6)
     return data ?? []

@@ -45,7 +45,9 @@ car-dealer/
 │   ├── cars/
 │   │   ├── page.tsx                # /cars — inventory listing
 │   │   └── [slug]/page.tsx         # /cars/[slug] — car detail page
-│   ├── import/page.tsx             # /import — import service + quote form
+│   ├── import/
+│   │   ├── page.tsx                # /import — import service overview, 3-car preview, quote form
+│   │   └── catalogue/page.tsx      # /import/catalogue — all importable vehicles (searchable/filterable)
 │   ├── recently-sold/page.tsx      # /recently-sold — sold vehicles grid
 │   ├── contact/page.tsx            # /contact — general contact form
 │   ├── admin/
@@ -74,7 +76,8 @@ car-dealer/
 │   │   ├── CarGallery.tsx          # Image carousel + lightbox for car detail page
 │   │   └── EnquireForm.tsx         # Car enquiry form (posts to /api/enquire)
 │   ├── import/
-│   │   └── ImportQuoteForm.tsx     # 3-step multi-step import quote form
+│   │   ├── ImportQuoteForm.tsx     # 3-step multi-step import quote form
+│   │   └── ImportCatalogueGrid.tsx # Searchable/filterable grid of importable cars (preview prop for /import page)
 │   ├── contact/
 │   │   └── ContactForm.tsx         # General contact form (posts to /api/enquire)
 │   ├── admin/
@@ -124,8 +127,10 @@ car-dealer/
 | vin | text | |
 | stock_number | text | |
 | description | text | Free-text description |
-| is_import | boolean | `true` = appears in import catalogue |
-| images | text[] | Array of Supabase Storage public URLs |
+| is_import | boolean | `true` = appears in import catalogue at `/import/catalogue` |
+| year_from | text | Import eligibility start e.g. `09/2001` (scraped, not in admin form) |
+| year_to | text | Import eligibility end e.g. `08/2005` or `CURRENT` |
+| images | text[] | Array of image URLs (Supabase Storage for admin-added cars; garageapex.com.au for scraped imports) |
 | created_at | timestamptz | |
 | updated_at | timestamptz | Auto-updated via trigger |
 
@@ -169,6 +174,12 @@ OWNER_EMAIL                     # Email address that receives all form submissio
 3. API route inserts row into `enquiries` table (via service role key)
 4. Sends email to `OWNER_EMAIL` via Resend with all details + `replyTo` set to visitor's email
 5. Sends confirmation email to visitor
+
+### Visitor browses import catalogue
+1. Visits `/import` → sees service overview, 3-car preview, quote form
+2. Clicks "Browse All X Vehicles" or header dropdown "Import Catalogue" → `/import/catalogue`
+3. `/import/catalogue` shows all `is_import=true` cars with live search + fuel-type filter
+4. Each card links to `/import#quote` for a quote request
 
 ### Visitor submits contact/import form
 - Same flow as above but `type: 'general'` or `type: 'import_quote'`
@@ -214,7 +225,11 @@ To rebrand: find/replace `#1a2744`, `#e8b84b`, `#0f1a33`, `#f4f5f7` across the c
 
 ## Common Tasks for a Future Claude Instance
 
-**Add a new page:** Create `app/your-page/page.tsx`. It automatically gets the public Navbar/Footer. No router config needed.
+**Add a new page:** Create `app/your-page/page.tsx`. It automatically gets the public Navbar/Footer. No router config needed. Add a nav link in `components/layout/Navbar.tsx` → `navLinks` array.
+
+**Add import catalogue vehicles:** Run `node scripts/scrape-imports.mjs` then `node scripts/bulk-insert-imports.mjs`. Both scripts are in `car-dealer/scripts/`. The scraper fetches SEVS-eligible vehicles from garageapex.com.au and outputs `scripts/import-catalogue.json`; the bulk-insert script upserts that JSON into Supabase.
+
+**next.config.ts image domains:** Two domains are whitelisted — `*.supabase.co` (admin-uploaded photos) and `garageapex.com.au` (scraped import catalogue images). Add more under `images.remotePatterns` if other image sources are used.
 
 **Add a new field to cars:** 1) Add column to Supabase via SQL, 2) Add to `lib/types.ts` `Car` interface, 3) Add field to `AdminCarForm.tsx` schema + JSX, 4) Display it in `CarCard.tsx` or `/cars/[slug]/page.tsx` as needed.
 

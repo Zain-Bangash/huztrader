@@ -180,8 +180,8 @@ export default async function ImportPage() {
               </Link>
             </div>
 
-            {/* 8-car preview — no search UI */}
-            <ImportCatalogueGrid cars={importCars} preview={8} />
+            {/* 3-car preview — no search UI */}
+            <ImportCatalogueGrid cars={importCars} preview={3} />
 
             {/* Bottom CTA */}
             <div className="mt-8 text-center">

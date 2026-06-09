@@ -11,10 +11,23 @@ Welcome! This guide explains how to use the Huz Trader website — both as a vis
 Anyone who visits your website can:
 
 - **Browse cars for sale** — view all available vehicles with photos, price, and details
+- **Browse the import catalogue** — see all 168 SEVS-eligible vehicles that can be sourced from Japan
 - **View recently sold cars** — see what's already found a home
 - **Enquire about a specific car** — send you a message asking about a car they like
-- **Request an import quote** — ask you to source a car from Japan
+- **Request an import quote** — ask you to source a specific car from Japan
 - **Send a general message** — ask any question through the contact page
+
+### How does the import catalogue work?
+
+Visitors can click **"Import A Car"** in the top navigation, then **"Import Catalogue"** from the dropdown. This takes them to a page showing all vehicles eligible for import to Australia, with:
+
+- A **search bar** to find a specific make, model, or variant
+- **Filter buttons** to show only Petrol, Hybrid, Electric, or Diesel vehicles
+- A **"Get Import Quote"** button on each card — this scrolls to the quote form
+
+The import page itself shows a 3-car preview. Visitors can click "Browse All Vehicles" to see the full catalogue.
+
+---
 
 ### How does enquiring work?
 
@@ -33,7 +46,7 @@ You are the admin. Here's everything you can do.
 ### How to log in
 
 1. Go to your website and add `/admin/login` to the end of the URL
-   - Example: `https://yoursite.vercel.app/admin/login`
+   `https://huztrader.vercel.app/admin/login`
 2. Enter your **email** and **password** (the ones you set up in Supabase)
 3. Click **Sign In**
 
@@ -131,12 +144,13 @@ Click **"Sign Out"** at the bottom of the left sidebar.
 
 | Task | Where to go |
 |---|---|
-| Add a new car | Admin → Cars → Add Car button |
+| Add a new car (for sale) | Admin → Cars → Add Car button |
 | Edit a car's details or photos | Admin → Cars → pencil icon |
 | Mark a car as sold | Admin → Cars → edit → change Status to Sold |
 | View customer enquiries | Admin → Enquiries |
 | Sign out | Bottom of the left sidebar |
 | Your website (public view) | Click "View Site" at the bottom of the sidebar |
+| View import catalogue (visitor view) | Header → Import A Car → Import Catalogue |
 
 ---
 

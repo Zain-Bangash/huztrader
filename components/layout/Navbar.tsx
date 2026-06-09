@@ -10,6 +10,7 @@ const navLinks = [
     label: 'Import A Car',
     href: '/import',
     children: [
+      { label: 'Import Catalogue', href: '/import/catalogue' },
       { label: 'How We Import', href: '/import#how-we-import' },
       { label: 'Import Process', href: '/import#process' },
       { label: 'Get A Quote', href: '/import#quote' },

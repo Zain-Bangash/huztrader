@@ -2,6 +2,7 @@ import { createClient } from '@/lib/supabase/server'
 import { ImportQuoteForm } from '@/components/import/ImportQuoteForm'
 import { ImportCatalogueGrid } from '@/components/import/ImportCatalogueGrid'
 import { CheckCircle2, Ship, FileCheck, Wrench, Search } from 'lucide-react'
+import Link from 'next/link'
 import type { Metadata } from 'next'
 import type { Car } from '@/lib/types'
 
@@ -157,22 +158,40 @@ export default async function ImportPage() {
         </div>
       </section>
 
-      {/* Import Catalogue */}
+      {/* Import Catalogue Preview */}
       {importCars.length > 0 && (
         <section className="py-14 bg-white" id="catalogue">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="mb-8">
-              <p className="text-[#e8b84b] font-semibold text-sm uppercase tracking-wider mb-2">
-                Eligible Vehicles
-              </p>
-              <h2 className="text-3xl font-bold text-[#1a2744]">
-                Cars We Can Import
-              </h2>
-              <p className="text-gray-500 mt-2">
-                Browse SEVS-eligible vehicles we can source from Japan. See something you like? Hit &ldquo;Get Import Quote&rdquo; and we&apos;ll handle the rest.
-              </p>
+            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
+              <div>
+                <p className="text-[#e8b84b] font-semibold text-sm uppercase tracking-wider mb-2">
+                  SEVS Eligible Vehicles
+                </p>
+                <h2 className="text-3xl font-bold text-[#1a2744]">Cars We Can Import</h2>
+                <p className="text-gray-500 mt-2">
+                  A sample of the {importCars.length} vehicles eligible for import to Australia.
+                </p>
+              </div>
+              <Link
+                href="/import/catalogue"
+                className="shrink-0 inline-flex items-center gap-2 border-2 border-[#1a2744] text-[#1a2744] font-semibold text-sm px-5 py-2.5 rounded-lg hover:bg-[#1a2744] hover:text-white transition-colors"
+              >
+                Browse All {importCars.length} Vehicles →
+              </Link>
             </div>
-            <ImportCatalogueGrid cars={importCars} />
+
+            {/* 8-car preview — no search UI */}
+            <ImportCatalogueGrid cars={importCars} preview={8} />
+
+            {/* Bottom CTA */}
+            <div className="mt-8 text-center">
+              <Link
+                href="/import/catalogue"
+                className="inline-flex items-center gap-2 bg-[#1a2744] text-white font-semibold text-sm px-6 py-3 rounded-lg hover:bg-[#243561] transition-colors"
+              >
+                View All {importCars.length} Importable Vehicles →
+              </Link>
+            </div>
           </div>
         </section>
       )}

@@ -8,6 +8,8 @@ import type { Car } from '@/lib/types'
 
 interface ImportCatalogueGridProps {
   cars: Car[]
+  /** If set, only show this many cards (no search UI — used for preview on /import) */
+  preview?: number
 }
 
 const FUEL_COLORS: Record<string, string> = {
@@ -17,9 +19,11 @@ const FUEL_COLORS: Record<string, string> = {
   Diesel:   'bg-orange-100 text-orange-700',
 }
 
-export function ImportCatalogueGrid({ cars }: ImportCatalogueGridProps) {
+export function ImportCatalogueGrid({ cars, preview }: ImportCatalogueGridProps) {
   const [search, setSearch]   = useState('')
   const [fuelFilter, setFuel] = useState('')
+
+  const isPreview = typeof preview === 'number'
 
   const fuelTypes = useMemo(() => {
     const set = new Set(cars.map((c) => c.fuel_type).filter(Boolean) as string[])
@@ -27,6 +31,7 @@ export function ImportCatalogueGrid({ cars }: ImportCatalogueGridProps) {
   }, [cars])
 
   const filtered = useMemo(() => {
+    if (isPreview) return cars.slice(0, preview)
     const q = search.toLowerCase()
     return cars.filter((c) => {
       const matchSearch =
@@ -37,53 +42,57 @@ export function ImportCatalogueGrid({ cars }: ImportCatalogueGridProps) {
       const matchFuel = !fuelFilter || c.fuel_type === fuelFilter
       return matchSearch && matchFuel
     })
-  }, [cars, search, fuelFilter])
+  }, [cars, search, fuelFilter, isPreview, preview])
 
   return (
     <div>
-      {/* Filters */}
-      <div className="flex flex-col sm:flex-row gap-3 mb-8">
-        <div className="relative flex-1 max-w-sm">
-          <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
-          <Input
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            placeholder="Search make, model, variant..."
-            className="pl-8"
-          />
-        </div>
-        <div className="flex gap-2 flex-wrap">
-          <button
-            onClick={() => setFuel('')}
-            className={`px-3 py-1.5 rounded-md text-sm font-medium transition-colors ${
-              !fuelFilter
-                ? 'bg-[#1a2744] text-white'
-                : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
-            }`}
-          >
-            All
-          </button>
-          {fuelTypes.map((f) => (
+      {/* Filters — hidden in preview mode */}
+      {!isPreview && (
+        <div className="flex flex-col sm:flex-row gap-3 mb-8">
+          <div className="relative flex-1 max-w-sm">
+            <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+            <Input
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              placeholder="Search make, model, variant..."
+              className="pl-8"
+            />
+          </div>
+          <div className="flex gap-2 flex-wrap">
             <button
-              key={f}
-              onClick={() => setFuel(f === fuelFilter ? '' : f)}
+              onClick={() => setFuel('')}
               className={`px-3 py-1.5 rounded-md text-sm font-medium transition-colors ${
-                fuelFilter === f
+                !fuelFilter
                   ? 'bg-[#1a2744] text-white'
                   : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
               }`}
             >
-              {f}
+              All
             </button>
-          ))}
+            {fuelTypes.map((f) => (
+              <button
+                key={f}
+                onClick={() => setFuel(f === fuelFilter ? '' : f)}
+                className={`px-3 py-1.5 rounded-md text-sm font-medium transition-colors ${
+                  fuelFilter === f
+                    ? 'bg-[#1a2744] text-white'
+                    : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                }`}
+              >
+                {f}
+              </button>
+            ))}
+          </div>
         </div>
-      </div>
+      )}
 
-      {/* Count */}
-      <p className="text-sm text-gray-500 mb-6">
-        {filtered.length} vehicle{filtered.length !== 1 ? 's' : ''} available to import
-        {(search || fuelFilter) && ` — filtered from ${cars.length}`}
-      </p>
+      {/* Count — hidden in preview mode */}
+      {!isPreview && (
+        <p className="text-sm text-gray-500 mb-6">
+          {filtered.length} vehicle{filtered.length !== 1 ? 's' : ''} available to import
+          {(search || fuelFilter) && ` — filtered from ${cars.length}`}
+        </p>
+      )}
 
       {/* Grid */}
       {filtered.length === 0 ? (

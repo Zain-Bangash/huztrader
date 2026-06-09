@@ -1,6 +1,26 @@
+import { createClient } from '@/lib/supabase/server'
 import { ImportQuoteForm } from '@/components/import/ImportQuoteForm'
+import { ImportCatalogueGrid } from '@/components/import/ImportCatalogueGrid'
 import { CheckCircle2, Ship, FileCheck, Wrench, Search } from 'lucide-react'
 import type { Metadata } from 'next'
+import type { Car } from '@/lib/types'
+
+export const dynamic = 'force-dynamic'
+
+async function getImportCars(): Promise<Car[]> {
+  try {
+    const supabase = await createClient()
+    const { data } = await supabase
+      .from('cars')
+      .select('*')
+      .eq('is_import', true)
+      .eq('status', 'for_sale')
+      .order('make', { ascending: true })
+    return data ?? []
+  } catch {
+    return []
+  }
+}
 
 export const metadata: Metadata = {
   title: 'Import A Car From Japan',
@@ -48,7 +68,9 @@ const whyImport = [
   'We handle all the paperwork — you just drive away',
 ]
 
-export default function ImportPage() {
+export default async function ImportPage() {
+  const importCars = await getImportCars()
+
   return (
     <>
       {/* Hero */}
@@ -135,8 +157,28 @@ export default function ImportPage() {
         </div>
       </section>
 
+      {/* Import Catalogue */}
+      {importCars.length > 0 && (
+        <section className="py-14 bg-white" id="catalogue">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="mb-8">
+              <p className="text-[#e8b84b] font-semibold text-sm uppercase tracking-wider mb-2">
+                Eligible Vehicles
+              </p>
+              <h2 className="text-3xl font-bold text-[#1a2744]">
+                Cars We Can Import
+              </h2>
+              <p className="text-gray-500 mt-2">
+                Browse SEVS-eligible vehicles we can source from Japan. See something you like? Hit &ldquo;Get Import Quote&rdquo; and we&apos;ll handle the rest.
+              </p>
+            </div>
+            <ImportCatalogueGrid cars={importCars} />
+          </div>
+        </section>
+      )}
+
       {/* Quote form */}
-      <section className="py-14 bg-white" id="quote">
+      <section className="py-14 bg-[#f4f5f7]" id="quote">
         <div className="max-w-2xl mx-auto px-4 sm:px-6">
           <div className="text-center mb-8">
             <p className="text-[#e8b84b] font-semibold text-sm uppercase tracking-wider mb-2">Free Quote</p>

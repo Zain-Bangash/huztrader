@@ -19,6 +19,8 @@ export interface Car {
   stock_number?: string
   description?: string
   is_import: boolean
+  year_from?: string
+  year_to?: string
   images: string[]
   created_at: string
   updated_at: string

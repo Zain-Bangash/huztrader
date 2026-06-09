@@ -69,7 +69,8 @@ export async function POST(request: NextRequest) {
     // Send email to owner
     if (OWNER_EMAIL && process.env.RESEND_API_KEY) {
       const typeLabel = type === 'car_quote' ? 'Car Enquiry' : type === 'import_quote' ? 'Import Quote Request' : 'General Contact'
-      await resend.emails.send({
+
+      const ownerResult = await resend.emails.send({
         from: 'Your Dealer Website <onboarding@resend.dev>',
         to: OWNER_EMAIL,
         subject: `New ${typeLabel} from ${first_name} ${last_name}`,
@@ -77,8 +78,14 @@ export async function POST(request: NextRequest) {
         replyTo: email,
       })
 
+      if (ownerResult.error) {
+        console.error('Resend owner email error:', ownerResult.error)
+      } else {
+        console.log('Owner email sent:', ownerResult.data?.id)
+      }
+
       // Confirmation email to visitor
-      await resend.emails.send({
+      const visitorResult = await resend.emails.send({
         from: 'Your Dealer <onboarding@resend.dev>',
         to: email,
         subject: `Thanks for your enquiry, ${first_name}!`,
@@ -95,6 +102,12 @@ export async function POST(request: NextRequest) {
           </div>
         `,
       })
+
+      if (visitorResult.error) {
+        console.error('Resend visitor email error:', visitorResult.error)
+      }
+    } else {
+      console.warn('Email not sent — OWNER_EMAIL or RESEND_API_KEY missing')
     }
 
     return NextResponse.json({ success: true })

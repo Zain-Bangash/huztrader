@@ -43,11 +43,11 @@ car-dealer/
 │   ├── page.tsx                    # Home page (server component, fetches featured cars)
 │   ├── globals.css                 # Global styles, CSS variables (brand colours)
 │   ├── cars/
-│   │   ├── page.tsx                # /cars — inventory listing
-│   │   └── [slug]/page.tsx         # /cars/[slug] — car detail page
+│   │   ├── page.tsx                # /cars — full unified car list (ALL cars, no is_import filter)
+│   │   └── [slug]/page.tsx         # /cars/[slug] — car detail page with enquire form
 │   ├── import/
-│   │   ├── page.tsx                # /import — import service overview, 3-car preview, quote form
-│   │   └── catalogue/page.tsx      # /import/catalogue — all importable vehicles (searchable/filterable)
+│   │   ├── page.tsx                # /import — service overview, 3-car preview (from all cars), quote form
+│   │   └── catalogue/page.tsx      # redirects → /cars
 │   ├── recently-sold/page.tsx      # /recently-sold — sold vehicles grid
 │   ├── contact/page.tsx            # /contact — general contact form
 │   ├── admin/
@@ -127,9 +127,9 @@ car-dealer/
 | vin | text | |
 | stock_number | text | |
 | description | text | Free-text description |
-| is_import | boolean | `true` = appears in import catalogue at `/import/catalogue` |
-| year_from | text | Import eligibility start e.g. `09/2001` (scraped, not in admin form) |
-| year_to | text | Import eligibility end e.g. `08/2005` or `CURRENT` |
+| is_import | boolean | Legacy field — no longer used to filter public pages. All cars appear on `/cars` regardless. |
+| year_from | text | Import eligibility start e.g. `09/2001` (scraped data only) |
+| year_to | text | Import eligibility end e.g. `08/2005` or `CURRENT` (scraped data only) |
 | images | text[] | Array of image URLs (Supabase Storage for admin-added cars; garageapex.com.au for scraped imports) |
 | created_at | timestamptz | |
 | updated_at | timestamptz | Auto-updated via trigger |
@@ -175,11 +175,10 @@ OWNER_EMAIL                     # Email address that receives all form submissio
 4. Sends email to `OWNER_EMAIL` via Resend with all details + `replyTo` set to visitor's email
 5. Sends confirmation email to visitor
 
-### Visitor browses import catalogue
-1. Visits `/import` → sees service overview, 3-car preview, quote form
-2. Clicks "Browse All X Vehicles" or header dropdown "Import Catalogue" → `/import/catalogue`
-3. `/import/catalogue` shows all `is_import=true` cars with live search + fuel-type filter
-4. Each card links to `/import#quote` for a quote request
+### Visitor browses cars
+1. Visits `/cars` (or clicks "Browse All Cars" from the Import A Car dropdown) → sees ALL cars (no is_import filter)
+2. Uses search/filter to find a vehicle, clicks "Enquire" → goes to `/cars/[slug]#enquire`
+3. The `/import` page shows a 3-car preview (latest 3 cars) with a "View Full Car Catalogue →" link to `/cars`
 
 ### Visitor submits contact/import form
 - Same flow as above but `type: 'general'` or `type: 'import_quote'`

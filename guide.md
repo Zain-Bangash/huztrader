@@ -10,24 +10,12 @@ Welcome! This guide explains how to use the Huz Trader website — both as a vis
 
 Anyone who visits your website can:
 
-- **Browse cars for sale** — view all available vehicles with photos, price, and details
-- **Browse the import catalogue** — see all 168 SEVS-eligible vehicles that can be sourced from Japan
+- **Browse all available cars** — one unified list of every vehicle (in-stock and available to order)
+- **Enquire about any car** — send you a message about a specific vehicle, regardless of whether it's on the lot or needs to be sourced
 - **View recently sold cars** — see what's already found a home
-- **Enquire about a specific car** — send you a message asking about a car they like
+- **Learn about the import service** — understand the process for sourcing a car from Japan
 - **Request an import quote** — ask you to source a specific car from Japan
 - **Send a general message** — ask any question through the contact page
-
-### How does the import catalogue work?
-
-Visitors can click **"Import A Car"** in the top navigation, then **"Import Catalogue"** from the dropdown. This takes them to a page showing all vehicles eligible for import to Australia, with:
-
-- A **search bar** to find a specific make, model, or variant
-- **Filter buttons** to show only Petrol, Hybrid, Electric, or Diesel vehicles
-- A **"Get Import Quote"** button on each card — this scrolls to the quote form
-
-The import page itself shows a 3-car preview. Visitors can click "Browse All Vehicles" to see the full catalogue.
-
----
 
 ### How does enquiring work?
 
@@ -150,7 +138,7 @@ Click **"Sign Out"** at the bottom of the left sidebar.
 | View customer enquiries | Admin → Enquiries |
 | Sign out | Bottom of the left sidebar |
 | Your website (public view) | Click "View Site" at the bottom of the sidebar |
-| View import catalogue (visitor view) | Header → Import A Car → Import Catalogue |
+| Browse all cars (visitor view) | Header → Cars For Sale, or Import A Car → Browse All Cars |
 
 ---
 

@@ -27,7 +27,6 @@ const schema = z.object({
   vin: z.string().optional(),
   stock_number: z.string().optional(),
   description: z.string().optional(),
-  is_import: z.boolean().optional(),
 })
 
 type FormData = z.output<typeof schema>
@@ -53,8 +52,7 @@ export function AdminCarForm({ car, mode }: AdminCarFormProps) {
       body_type: car.body_type ?? '', transmission: car.transmission ?? '',
       fuel_type: car.fuel_type ?? '', colour: car.colour ?? '', vin: car.vin ?? '',
       stock_number: car.stock_number ?? '', description: car.description ?? '',
-      is_import: car.is_import,
-    } : { status: 'for_sale', is_import: false, year: new Date().getFullYear() },
+    } : { status: 'for_sale', year: new Date().getFullYear() },
   })
 
   const uploadImages = async (files: FileList) => {
@@ -191,17 +189,6 @@ export function AdminCarForm({ car, mode }: AdminCarFormProps) {
           <div>
             <label className="block text-xs font-medium text-gray-600 mb-1">VIN</label>
             <Input {...register('vin')} placeholder="JT..." />
-          </div>
-          <div className="flex items-center gap-2 mt-5">
-            <input
-              type="checkbox"
-              id="is_import"
-              {...register('is_import')}
-              className="w-4 h-4 rounded border-gray-300 text-[#1a2744] focus:ring-[#1a2744]"
-            />
-            <label htmlFor="is_import" className="text-sm text-gray-700">
-              This is an importable model (shows in import catalogue)
-            </label>
           </div>
         </div>
       </div>

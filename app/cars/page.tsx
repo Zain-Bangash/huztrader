@@ -4,9 +4,11 @@ import { Car } from 'lucide-react'
 import type { Metadata } from 'next'
 import type { Car as CarType } from '@/lib/types'
 
+export const dynamic = 'force-dynamic'
+
 export const metadata: Metadata = {
   title: 'Cars For Sale',
-  description: 'Browse our quality used car inventory. Drive away today.',
+  description: 'Browse our full inventory — in-stock and available to order. Enquire on any vehicle today.',
 }
 
 async function getCars(): Promise<CarType[]> {
@@ -16,7 +18,6 @@ async function getCars(): Promise<CarType[]> {
       .from('cars')
       .select('*')
       .eq('status', 'for_sale')
-      .eq('is_import', false)
       .order('created_at', { ascending: false })
     return data ?? []
   } catch {
@@ -31,11 +32,11 @@ export default async function CarsPage() {
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       {/* Header */}
       <div className="mb-8">
-        <p className="text-[#e8b84b] font-semibold text-sm uppercase tracking-wider mb-2">In Stock</p>
+        <p className="text-[#e8b84b] font-semibold text-sm uppercase tracking-wider mb-2">Full Inventory</p>
         <h1 className="text-4xl font-bold text-[#1a2744]">Cars For Sale</h1>
         <p className="text-gray-500 mt-2">
           {cars.length > 0
-            ? `${cars.length} vehicle${cars.length !== 1 ? 's' : ''} available — drive away today`
+            ? `${cars.length} vehicle${cars.length !== 1 ? 's' : ''} available — enquire on any car today`
             : 'New inventory arriving soon'}
         </p>
       </div>

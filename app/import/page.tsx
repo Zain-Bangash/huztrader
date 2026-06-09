@@ -8,15 +8,15 @@ import type { Car } from '@/lib/types'
 
 export const dynamic = 'force-dynamic'
 
-async function getImportCars(): Promise<Car[]> {
+async function getPreviewCars(): Promise<Car[]> {
   try {
     const supabase = await createClient()
     const { data } = await supabase
       .from('cars')
       .select('*')
-      .eq('is_import', true)
       .eq('status', 'for_sale')
-      .order('make', { ascending: true })
+      .order('created_at', { ascending: false })
+      .limit(3)
     return data ?? []
   } catch {
     return []
@@ -70,7 +70,7 @@ const whyImport = [
 ]
 
 export default async function ImportPage() {
-  const importCars = await getImportCars()
+  const importCars = await getPreviewCars()
 
   return (
     <>
@@ -158,25 +158,25 @@ export default async function ImportPage() {
         </div>
       </section>
 
-      {/* Import Catalogue Preview */}
+      {/* Car preview */}
       {importCars.length > 0 && (
         <section className="py-14 bg-white" id="catalogue">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
               <div>
                 <p className="text-[#e8b84b] font-semibold text-sm uppercase tracking-wider mb-2">
-                  SEVS Eligible Vehicles
+                  Available Vehicles
                 </p>
-                <h2 className="text-3xl font-bold text-[#1a2744]">Cars We Can Import</h2>
+                <h2 className="text-3xl font-bold text-[#1a2744]">Browse Our Cars</h2>
                 <p className="text-gray-500 mt-2">
-                  A sample of the {importCars.length} vehicles eligible for import to Australia.
+                  A sample of what&apos;s available — enquire on any vehicle and we&apos;ll get back to you.
                 </p>
               </div>
               <Link
-                href="/import/catalogue"
+                href="/cars"
                 className="shrink-0 inline-flex items-center gap-2 border-2 border-[#1a2744] text-[#1a2744] font-semibold text-sm px-5 py-2.5 rounded-lg hover:bg-[#1a2744] hover:text-white transition-colors"
               >
-                Browse All {importCars.length} Vehicles →
+                View All Cars →
               </Link>
             </div>
 
@@ -186,10 +186,10 @@ export default async function ImportPage() {
             {/* Bottom CTA */}
             <div className="mt-8 text-center">
               <Link
-                href="/import/catalogue"
+                href="/cars"
                 className="inline-flex items-center gap-2 bg-[#1a2744] text-white font-semibold text-sm px-6 py-3 rounded-lg hover:bg-[#243561] transition-colors"
               >
-                View All {importCars.length} Importable Vehicles →
+                View Full Car Catalogue →
               </Link>
             </div>
           </div>

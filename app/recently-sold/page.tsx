@@ -28,15 +28,15 @@ export default async function RecentlySoldPage() {
   const cars = await getSoldCars()
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-14">
       <div className="mb-8">
-        <p className="text-[#e8b84b] font-semibold text-sm uppercase tracking-wider mb-2">Track Record</p>
-        <h1 className="text-4xl font-bold text-[#1a2744]">Recently Sold</h1>
+        <p className="text-[#6E7480] font-semibold text-xs uppercase tracking-[0.12em] mb-2">Track Record</p>
+        <h1 className="font-display text-4xl font-bold text-[#111B2E]">Recently Sold</h1>
         <p className="text-gray-500 mt-2">Vehicles we&apos;ve found great homes for</p>
       </div>
 
       {cars.length > 0 ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
           {cars.map((car) => (
             <CarCard key={car.id} car={car} showEnquire={false} />
           ))}

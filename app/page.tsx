@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { ArrowRight, Shield, Clock, Award, Users, Car, CheckCircle2, Star } from 'lucide-react'
+import { ArrowRight, Car, CheckCircle2 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { createClient } from '@/lib/supabase/server'
 import { CarCard } from '@/components/cars/CarCard'
@@ -20,11 +20,11 @@ async function getFeaturedCars(): Promise<CarType[]> {
   }
 }
 
-const trustBadges = [
-  { icon: Shield, label: 'Family Operated', sub: 'Over 10 Years Experience' },
-  { icon: Award, label: 'Quality Assured', sub: 'Every car inspected' },
-  { icon: Clock, label: 'Fast Turnaround', sub: 'Imports in 6–10 weeks' },
-  { icon: Users, label: 'Happy Customers', sub: '500+ vehicles sold' },
+const trustStats = [
+  { stat: '500+', label: 'Vehicles sold' },
+  { stat: '10+ Years', label: 'Family operated' },
+  { stat: '6–10 Weeks', label: 'Import turnaround' },
+  { stat: 'Every Car', label: 'Inspected & quality assured' },
 ]
 
 const importSteps = [
@@ -39,20 +39,19 @@ export default async function HomePage() {
 
   return (
     <>
-      {/* Hero */}
-      <section className="relative bg-[#1a2744] text-white overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-[#1a2744] via-[#243561] to-[#0f1a33]" />
-        <div className="absolute inset-0 opacity-10"
-          style={{ backgroundImage: 'radial-gradient(circle at 20% 50%, #e8b84b 0%, transparent 50%)' }} />
+      {/* Hero — gradient fallback composition (photo upgrade pending owner asset, redesign.md §6) */}
+      <section className="relative bg-ink-900 text-white overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-ink-800 via-ink-700 to-ink-900" />
+        <div className="absolute inset-0 opacity-[0.07]"
+          style={{ backgroundImage: 'radial-gradient(circle at 20% 50%, #C9A227 0%, transparent 50%)' }} />
 
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-32">
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-36">
           <div className="max-w-3xl">
-            <div className="inline-flex items-center gap-2 bg-[#e8b84b]/20 border border-[#e8b84b]/30 rounded-full px-4 py-1.5 mb-6">
-              <Star size={14} className="text-[#e8b84b]" />
-              <span className="text-[#e8b84b] text-sm font-medium">Trusted Used Car Dealer &amp; Import Specialists</span>
-            </div>
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-6">
-              Find Your <span className="text-[#e8b84b]">Dream Car</span><br />
+            <p className="text-white/60 font-semibold text-xs uppercase tracking-[0.12em] mb-5">
+              Used Cars &amp; Japanese Imports — Family Run
+            </p>
+            <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.05] mb-6">
+              Find Your <span className="text-gold-500">Dream Car</span><br />
               Today
             </h1>
             <p className="text-lg text-gray-300 mb-8 max-w-xl leading-relaxed">
@@ -62,11 +61,11 @@ export default async function HomePage() {
               <Link href="/cars">
                 <Button variant="accent" size="lg" className="gap-2">
                   Browse Cars For Sale
-                  <ArrowRight size={18} />
+                  <ArrowRight size={18} strokeWidth={1.5} />
                 </Button>
               </Link>
               <Link href="/import">
-                <Button variant="outline" size="lg" className="border-white/40 text-white hover:bg-white hover:text-[#1a2744]">
+                <Button variant="outline" size="lg" className="border-white/40 text-white hover:bg-white/10">
                   Import From Japan
                 </Button>
               </Link>
@@ -74,19 +73,14 @@ export default async function HomePage() {
           </div>
         </div>
 
-        {/* Trust badges */}
+        {/* Trust band — quiet stat row */}
         <div className="relative border-t border-white/10 bg-black/20">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
-              {trustBadges.map(({ icon: Icon, label, sub }) => (
-                <div key={label} className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-[#e8b84b]/20 flex items-center justify-center shrink-0">
-                    <Icon size={18} className="text-[#e8b84b]" />
-                  </div>
-                  <div>
-                    <div className="text-white font-semibold text-sm">{label}</div>
-                    <div className="text-gray-400 text-xs">{sub}</div>
-                  </div>
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-7">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-0 lg:divide-x divide-white/10">
+              {trustStats.map(({ stat, label }) => (
+                <div key={label} className="lg:px-8 lg:first:pl-0">
+                  <div className="font-display text-lg lg:text-xl font-semibold text-white tabular-nums">{stat}</div>
+                  <div className="text-gray-400 text-xs mt-0.5">{label}</div>
                 </div>
               ))}
             </div>
@@ -95,28 +89,30 @@ export default async function HomePage() {
       </section>
 
       {/* Featured Cars */}
-      <section className="py-16 bg-white">
+      <section className="py-20 lg:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-end justify-between mb-10">
-            <div>
-              <p className="text-[#e8b84b] font-semibold text-sm uppercase tracking-wider mb-2">In Stock Now</p>
-              <h2 className="text-3xl font-bold text-[#1a2744]">Cars For Sale</h2>
-              <p className="text-gray-500 mt-1">Drive away today — no waiting, no importing required</p>
-            </div>
-            <Link href="/cars" className="hidden sm:flex items-center gap-1 text-[#1a2744] font-semibold text-sm hover:text-[#e8b84b] transition-colors">
-              View all <ArrowRight size={16} />
-            </Link>
+          <div className="mb-10">
+            <p className="text-[#6E7480] font-semibold text-xs uppercase tracking-[0.12em] mb-2">In Stock Now</p>
+            <h2 className="font-display text-3xl font-semibold text-ink-800">Cars For Sale</h2>
+            <p className="text-gray-500 mt-1">Drive away today — no waiting, no importing required</p>
           </div>
 
           {featuredCars.length > 0 ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {featuredCars.map((car) => (
-                <CarCard key={car.id} car={car} />
-              ))}
-            </div>
+            <>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                {featuredCars.map((car) => (
+                  <CarCard key={car.id} car={car} />
+                ))}
+              </div>
+              <div className="mt-10 text-center">
+                <Link href="/cars">
+                  <Button variant="outline" size="lg">View All Cars</Button>
+                </Link>
+              </div>
+            </>
           ) : (
-            <div className="text-center py-16 bg-gray-50 rounded-xl">
-              <Car size={40} className="text-gray-300 mx-auto mb-3" />
+            <div className="text-center py-16 bg-white rounded-xl shadow-card">
+              <Car size={40} strokeWidth={1.5} className="text-gray-300 mx-auto mb-3" />
               <p className="text-gray-500 font-medium">New inventory coming soon</p>
               <p className="text-gray-400 text-sm mt-1">Check back shortly or contact us for availability</p>
               <Link href="/contact" className="mt-4 inline-block">
@@ -124,77 +120,66 @@ export default async function HomePage() {
               </Link>
             </div>
           )}
-
-          <div className="mt-8 text-center sm:hidden">
-            <Link href="/cars">
-              <Button variant="outline">View All Cars</Button>
-            </Link>
-          </div>
         </div>
       </section>
 
-      {/* Import CTA */}
-      <section className="py-16 bg-[#f4f5f7]">
+      {/* Import CTA — full-bleed dark band */}
+      <section className="py-20 lg:py-24 bg-ink-800 border-y border-white/5">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-[#1a2744] rounded-2xl overflow-hidden">
-            <div className="grid lg:grid-cols-2">
-              <div className="p-10 lg:p-14">
-                <p className="text-[#e8b84b] font-semibold text-sm uppercase tracking-wider mb-3">Can&apos;t Find What You Want?</p>
-                <h2 className="text-3xl font-bold text-white mb-4">
-                  We&apos;ll Import It From Japan
-                </h2>
-                <p className="text-gray-300 mb-6 leading-relaxed">
-                  Access thousands of Japanese vehicles not available locally. We handle everything from sourcing to compliance — you just drive away.
-                </p>
-                <ul className="space-y-3 mb-8">
-                  {[
-                    'Access to major Japanese auctions',
-                    'Full compliance & registration handled',
-                    'Typically 6–10 weeks door to door',
-                    'Transparent landed cost breakdown',
-                  ].map((item) => (
-                    <li key={item} className="flex items-center gap-2.5 text-gray-300 text-sm">
-                      <CheckCircle2 size={16} className="text-[#e8b84b] shrink-0" />
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-                <Link href="/import">
-                  <Button variant="accent" size="lg">
-                    Get Import Quote <ArrowRight size={16} />
-                  </Button>
-                </Link>
-              </div>
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-20">
+            <div>
+              <p className="text-white/60 font-semibold text-xs uppercase tracking-[0.12em] mb-3">Can&apos;t Find What You Want?</p>
+              <h2 className="font-display text-3xl font-semibold text-white mb-4">
+                We&apos;ll Import It From Japan
+              </h2>
+              <p className="text-gray-300 mb-6 leading-relaxed">
+                Access thousands of Japanese vehicles not available locally. We handle everything from sourcing to compliance — you just drive away.
+              </p>
+              <ul className="space-y-3 mb-8">
+                {[
+                  'Access to major Japanese auctions',
+                  'Full compliance & registration handled',
+                  'Typically 6–10 weeks door to door',
+                  'Transparent landed cost breakdown',
+                ].map((item) => (
+                  <li key={item} className="flex items-center gap-2.5 text-gray-300 text-sm">
+                    <CheckCircle2 size={16} strokeWidth={1.5} className="text-white/70 shrink-0" />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+              <Link href="/import">
+                <Button variant="accent" size="lg">
+                  Get Import Quote <ArrowRight size={16} strokeWidth={1.5} />
+                </Button>
+              </Link>
+            </div>
 
-              {/* Steps */}
-              <div className="bg-white/5 p-10 lg:p-14 border-t lg:border-t-0 lg:border-l border-white/10">
-                <h3 className="text-white font-semibold mb-6 text-sm uppercase tracking-wider">How It Works</h3>
-                <div className="space-y-6">
-                  {importSteps.map(({ step, title, desc }) => (
-                    <div key={step} className="flex gap-4">
-                      <div className="w-8 h-8 rounded-full bg-[#e8b84b]/20 border border-[#e8b84b]/40 flex items-center justify-center shrink-0">
-                        <span className="text-[#e8b84b] text-xs font-bold">{step}</span>
-                      </div>
-                      <div>
-                        <div className="text-white font-medium text-sm">{title}</div>
-                        <div className="text-gray-400 text-xs mt-0.5 leading-relaxed">{desc}</div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
+            {/* Steps — vertical timeline with gold connecting line */}
+            <div>
+              <h3 className="text-white/60 font-semibold mb-8 text-xs uppercase tracking-[0.12em]">How It Works</h3>
+              <ol className="relative ml-4 border-l border-gold-500/40 space-y-9">
+                {importSteps.map(({ step, title, desc }) => (
+                  <li key={step} className="relative pl-9">
+                    <span className="absolute -left-4 top-0 w-8 h-8 rounded-full bg-ink-800 border border-gold-500/60 flex items-center justify-center">
+                      <span className="font-display text-gold-500 text-xs font-bold tabular-nums">{step}</span>
+                    </span>
+                    <div className="text-white font-medium text-sm pt-1.5">{title}</div>
+                    <div className="text-gray-400 text-[13px] mt-1 leading-relaxed">{desc}</div>
+                  </li>
+                ))}
+              </ol>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Contact CTA */}
-      <section className="py-14 bg-white">
+      {/* Contact CTA — one line, one button */}
+      <section className="py-16 bg-mist">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl font-bold text-[#1a2744] mb-3">Not Sure Where To Start?</h2>
-          <p className="text-gray-500 mb-7 max-w-xl mx-auto">
-            Our team is here to help. Whether you&apos;re buying, importing, or just browsing — reach out and we&apos;ll guide you.
-          </p>
+          <h2 className="font-display text-3xl font-semibold text-ink-800 mb-6">
+            Not sure where to start? We&apos;re happy to help.
+          </h2>
           <Link href="/contact">
             <Button variant="primary" size="lg">Contact Us Today</Button>
           </Link>

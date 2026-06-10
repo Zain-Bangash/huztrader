@@ -1,13 +1,26 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
+  /* Redesign v2 tokens (redesign.md §4.1) */
+  --ink-900: #0B1220;
+  --ink-800: #111B2E;
+  --ink-700: #1C2A45;
+  --gold-500: #C9A227;
+  --gold-600: #B38D1F;
+  --paper: #FAFAF8;
+  --mist: #F1F2F0;
+  --stone-text: #6E7480;
+  --hairline: #D8DAD5;
+  --signal-red: #B42318;
+  --signal-green: #067647;
+
+  --background: var(--paper);
   --foreground: #0f1117;
-  --primary: #1a2744;
-  --accent: #e8b84b;
-  --muted: #f4f5f7;
-  --muted-foreground: #6b7280;
-  --border: #e5e7eb;
+  --primary: var(--ink-800);
+  --accent: var(--gold-500);
+  --muted: var(--mist);
+  --muted-foreground: var(--stone-text);
+  --border: var(--hairline);
 }
 
 @theme inline {
@@ -17,8 +30,21 @@
   --color-accent: var(--accent);
   --color-muted: var(--muted);
   --color-border: var(--border);
+  --color-ink-900: var(--ink-900);
+  --color-ink-800: var(--ink-800);
+  --color-ink-700: var(--ink-700);
+  --color-gold-500: var(--gold-500);
+  --color-gold-600: var(--gold-600);
+  --color-paper: var(--paper);
+  --color-mist: var(--mist);
+  --color-signal-red: var(--signal-red);
+  --color-signal-green: var(--signal-green);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-display: var(--font-archivo);
+  /* Surface system (redesign.md §2.2) */
+  --shadow-card: 0 1px 2px rgba(16, 24, 40, 0.04), 0 4px 16px rgba(16, 24, 40, 0.06);
+  --shadow-card-hover: 0 8px 32px rgba(16, 24, 40, 0.12);
 }
 
 html {
@@ -38,3 +64,9 @@ body {
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: #f1f1f1; }
 ::-webkit-scrollbar-thumb { background: #c1c1c1; border-radius: 3px; }
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}

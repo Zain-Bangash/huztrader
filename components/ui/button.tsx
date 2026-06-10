@@ -15,14 +15,14 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         className={cn(
           'inline-flex items-center justify-center gap-2 rounded-md font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none',
           {
-            'bg-[#1a2744] text-white hover:bg-[#243561] focus-visible:ring-[#1a2744]': variant === 'primary',
-            'border border-[#1a2744] text-[#1a2744] hover:bg-[#1a2744] hover:text-white': variant === 'outline',
-            'text-[#1a2744] hover:bg-gray-100': variant === 'ghost',
-            'bg-[#e8b84b] text-[#0f1117] hover:bg-[#d4a53a] focus-visible:ring-[#e8b84b]': variant === 'accent',
-            'bg-red-600 text-white hover:bg-red-700': variant === 'danger',
-            'text-sm px-3 py-1.5': size === 'sm',
-            'text-sm px-4 py-2': size === 'md',
-            'text-base px-6 py-3': size === 'lg',
+            'bg-[#111B2E] text-white hover:bg-[#1C2A45] focus-visible:ring-[#111B2E]': variant === 'primary',
+            'border-[1.5px] border-[#111B2E] text-[#111B2E] hover:bg-[#111B2E]/5 focus-visible:ring-[#111B2E]': variant === 'outline',
+            'text-[#111B2E] hover:bg-gray-100': variant === 'ghost',
+            'bg-[#C9A227] text-[#0B1220] font-semibold hover:shadow-[inset_0_0_0_999px_rgba(255,255,255,0.14)] focus-visible:ring-[#C9A227]': variant === 'accent',
+            'bg-[#B42318] text-white hover:bg-[#9A1E14]': variant === 'danger',
+            'text-sm px-3 py-1.5 min-h-9': size === 'sm',
+            'text-sm px-4 py-2 min-h-11': size === 'md',
+            'text-base px-7 py-3 min-h-12': size === 'lg',
           },
           className
         )}

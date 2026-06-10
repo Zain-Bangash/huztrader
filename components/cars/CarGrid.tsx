@@ -48,58 +48,66 @@ export function CarGrid({ cars, showSoldBadge = false }: CarGridProps) {
     return result
   }, [cars, filters])
 
-  const hasActiveFilters = Object.entries(filters).some(([k, v]) => k !== 'sort' && v !== '')
+  const activeFilterCount = Object.entries(filters).filter(([k, v]) => k !== 'sort' && v !== '').length
+  const hasActiveFilters = activeFilterCount > 0
 
   const set = (key: keyof FiltersState) => (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) =>
     setFilters((prev) => ({ ...prev, [key]: e.target.value }))
 
+  const pillField = 'h-10 rounded-full bg-[#F1F2F0] text-[13px]'
+
   return (
     <div>
       {/* Filter bar */}
-      <div className="bg-white border border-gray-200 rounded-xl p-4 mb-6">
-        <div className="flex items-center justify-between mb-4 lg:mb-0">
-          <div className="flex items-center gap-2">
-            <SlidersHorizontal size={16} className="text-[#1a2744]" />
-            <span className="font-semibold text-[#1a2744] text-sm">Filter Results</span>
-            <span className="text-gray-400 text-sm">({filtered.length} cars)</span>
-          </div>
+      <div className="bg-white rounded-xl shadow-card p-4 sm:p-5 mb-8">
+        <div className="flex items-center justify-between">
+          <span className="font-display text-lg font-semibold text-[#111B2E] tabular-nums">
+            {filtered.length} vehicle{filtered.length !== 1 ? 's' : ''}
+          </span>
           <button
-            className="lg:hidden text-sm text-[#1a2744] underline"
+            className="lg:hidden inline-flex items-center gap-1.5 rounded-full bg-[#F1F2F0] px-4 py-2 text-sm font-medium text-[#111B2E]"
             onClick={() => setShowFilters(!showFilters)}
           >
-            {showFilters ? 'Hide' : 'Show'} filters
+            <SlidersHorizontal size={14} strokeWidth={1.5} />
+            Filters
+            {hasActiveFilters && (
+              <span className="ml-0.5 inline-flex items-center justify-center min-w-5 h-5 rounded-full bg-[#111B2E] text-white text-[11px] font-semibold px-1 tabular-nums">
+                {activeFilterCount}
+              </span>
+            )}
           </button>
         </div>
 
-        <div className={`grid grid-cols-2 lg:grid-cols-6 gap-3 mt-4 ${showFilters ? 'block' : 'hidden lg:grid'}`}>
-          <Select value={filters.make} onChange={set('make')}>
+        <div className={`grid grid-cols-2 lg:grid-cols-6 gap-3 mt-4 ${showFilters ? 'grid' : 'hidden lg:grid'}`}>
+          <Select className={pillField} value={filters.make} onChange={set('make')}>
             <option value="">All Makes</option>
             {makes.map((m) => <option key={m} value={m}>{m}</option>)}
           </Select>
 
-          <Select value={filters.bodyType} onChange={set('bodyType')}>
+          <Select className={pillField} value={filters.bodyType} onChange={set('bodyType')}>
             <option value="">Body Type</option>
             {bodyTypes.map((b) => <option key={b} value={b}>{b}</option>)}
           </Select>
 
-          <Select value={filters.transmission} onChange={set('transmission')}>
+          <Select className={pillField} value={filters.transmission} onChange={set('transmission')}>
             <option value="">Transmission</option>
             {transmissions.map((t) => <option key={t} value={t}>{t}</option>)}
           </Select>
 
-          <Select value={filters.fuelType} onChange={set('fuelType')}>
+          <Select className={pillField} value={filters.fuelType} onChange={set('fuelType')}>
             <option value="">Fuel Type</option>
             {fuelTypes.map((f) => <option key={f} value={f}>{f}</option>)}
           </Select>
 
           <Input
             type="number"
+            className={`${pillField} px-4`}
             placeholder="Max price (AUD)"
             value={filters.maxPrice}
             onChange={set('maxPrice')}
           />
 
-          <Select value={filters.sort} onChange={set('sort')}>
+          <Select className={pillField} value={filters.sort} onChange={set('sort')}>
             <option value="newest">Newest First</option>
             <option value="price_asc">Price: Low → High</option>
             <option value="price_desc">Price: High → Low</option>
@@ -110,23 +118,34 @@ export function CarGrid({ cars, showSoldBadge = false }: CarGridProps) {
         {hasActiveFilters && (
           <button
             onClick={() => setFilters(DEFAULT_FILTERS)}
-            className="mt-3 flex items-center gap-1 text-sm text-red-500 hover:text-red-700"
+            className="mt-3 flex items-center gap-1 text-sm text-[#6E7480] hover:text-[#111B2E] transition-colors"
           >
-            <X size={14} /> Reset filters
+            <X size={14} strokeWidth={1.5} /> Reset filters
           </button>
         )}
       </div>
 
       {/* Grid */}
       {filtered.length > 0 ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-8">
           {filtered.map((car) => (
             <CarCard key={car.id} car={car} showEnquire={!showSoldBadge} />
           ))}
         </div>
       ) : (
-        <div className="text-center py-16 bg-gray-50 rounded-xl">
+        <div className="text-center py-16 bg-white rounded-xl shadow-card">
           <p className="text-gray-500 font-medium">No cars match your filters</p>
+          {hasActiveFilters && (
+            <p className="text-gray-400 text-sm mt-1.5 tabular-nums">
+              Active filters: {[
+                filters.make,
+                filters.bodyType,
+                filters.transmission,
+                filters.fuelType,
+                filters.maxPrice ? `Under $${Number(filters.maxPrice).toLocaleString('en-AU')}` : '',
+              ].filter(Boolean).join(' · ')}
+            </p>
+          )}
           <Button variant="ghost" size="sm" className="mt-3" onClick={() => setFilters(DEFAULT_FILTERS)}>
             Clear filters
           </Button>

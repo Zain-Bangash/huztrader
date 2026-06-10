@@ -90,18 +90,18 @@ export function ImportQuoteForm() {
   }
 
   return (
-    <div className="bg-white border border-gray-200 rounded-xl p-6 sm:p-8">
+    <div className="bg-white rounded-xl shadow-card p-6 sm:p-8">
       {/* Progress */}
       <div className="flex items-center gap-2 mb-8">
         {steps.map((label, i) => (
           <div key={label} className="flex items-center gap-2 flex-1">
             <div className={cn(
               'w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold shrink-0',
-              i < step ? 'bg-green-500 text-white' : i === step ? 'bg-[#1a2744] text-white' : 'bg-gray-200 text-gray-500'
+              i < step ? 'bg-green-500 text-white' : i === step ? 'bg-[#111B2E] text-white' : 'bg-gray-200 text-gray-500'
             )}>
               {i < step ? '✓' : i + 1}
             </div>
-            <span className={cn('text-xs font-medium hidden sm:block', i === step ? 'text-[#1a2744]' : 'text-gray-400')}>
+            <span className={cn('text-xs font-medium hidden sm:block', i === step ? 'text-[#111B2E]' : 'text-gray-400')}>
               {label}
             </span>
             {i < steps.length - 1 && <div className={cn('flex-1 h-0.5', i < step ? 'bg-green-500' : 'bg-gray-200')} />}
@@ -113,7 +113,7 @@ export function ImportQuoteForm() {
         {/* Step 0: Budget */}
         {step === 0 && (
           <div className="space-y-4">
-            <h3 className="text-lg font-bold text-[#1a2744]">What are you looking for?</h3>
+            <h3 className="text-lg font-bold text-[#111B2E]">What are you looking for?</h3>
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">Maximum Budget (AUD) *</label>
               <Input {...register('budget')} placeholder="e.g. $40,000" />
@@ -145,7 +145,7 @@ export function ImportQuoteForm() {
         {/* Step 1: Contact */}
         {step === 1 && (
           <div className="space-y-4">
-            <h3 className="text-lg font-bold text-[#1a2744]">Your contact details</h3>
+            <h3 className="text-lg font-bold text-[#111B2E]">Your contact details</h3>
             <div className="grid grid-cols-2 gap-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">First Name *</label>
@@ -177,7 +177,7 @@ export function ImportQuoteForm() {
         {/* Step 2: Preferences */}
         {step === 2 && (
           <div className="space-y-5">
-            <h3 className="text-lg font-bold text-[#1a2744]">How should we contact you?</h3>
+            <h3 className="text-lg font-bold text-[#111B2E]">How should we contact you?</h3>
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">Preferred contact method *</label>
               <div className="grid grid-cols-2 gap-2">
@@ -189,8 +189,8 @@ export function ImportQuoteForm() {
                     className={cn(
                       'py-2.5 px-3 rounded-lg border text-sm font-medium transition-colors text-left',
                       contactPrefs.includes(pref)
-                        ? 'bg-[#1a2744] text-white border-[#1a2744]'
-                        : 'border-gray-200 text-gray-600 hover:border-[#1a2744]'
+                        ? 'bg-[#111B2E] text-white border-[#111B2E]'
+                        : 'border-gray-200 text-gray-600 hover:border-[#111B2E]'
                     )}
                   >
                     {pref}

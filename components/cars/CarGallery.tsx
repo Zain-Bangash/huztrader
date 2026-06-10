@@ -14,8 +14,8 @@ export function CarGallery({ images, alt }: CarGalleryProps) {
 
   if (!images || images.length === 0) {
     return (
-      <div className="aspect-[16/10] bg-gray-100 rounded-xl flex items-center justify-center">
-        <Car size={56} className="text-gray-300" />
+      <div className="aspect-video bg-gray-100 rounded-xl flex items-center justify-center">
+        <Car size={56} strokeWidth={1.5} className="text-gray-300" />
       </div>
     )
   }
@@ -26,7 +26,7 @@ export function CarGallery({ images, alt }: CarGalleryProps) {
   return (
     <>
       {/* Main image */}
-      <div className="relative aspect-[16/10] bg-gray-100 rounded-xl overflow-hidden cursor-zoom-in"
+      <div className="relative aspect-video bg-gray-100 rounded-xl overflow-hidden cursor-zoom-in"
         onClick={() => setLightbox(true)}>
         <Image
           src={images[activeIdx]}
@@ -40,17 +40,19 @@ export function CarGallery({ images, alt }: CarGalleryProps) {
           <>
             <button
               onClick={(e) => { e.stopPropagation(); prev() }}
-              className="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-black/40 text-white flex items-center justify-center hover:bg-black/60 transition-colors"
+              className="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-[#0B1220]/50 text-white flex items-center justify-center hover:bg-[#0B1220]/70 transition-colors"
+              aria-label="Previous photo"
             >
-              <ChevronLeft size={18} />
+              <ChevronLeft size={18} strokeWidth={1.5} />
             </button>
             <button
               onClick={(e) => { e.stopPropagation(); next() }}
-              className="absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-black/40 text-white flex items-center justify-center hover:bg-black/60 transition-colors"
+              className="absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-[#0B1220]/50 text-white flex items-center justify-center hover:bg-[#0B1220]/70 transition-colors"
+              aria-label="Next photo"
             >
-              <ChevronRight size={18} />
+              <ChevronRight size={18} strokeWidth={1.5} />
             </button>
-            <div className="absolute bottom-3 right-3 bg-black/50 text-white text-xs px-2 py-1 rounded">
+            <div className="absolute bottom-3 right-3 bg-[#0B1220]/60 text-white text-xs px-2 py-1 rounded tabular-nums">
               {activeIdx + 1} / {images.length}
             </div>
           </>
@@ -64,11 +66,12 @@ export function CarGallery({ images, alt }: CarGalleryProps) {
             <button
               key={i}
               onClick={() => setActiveIdx(i)}
-              className={`relative w-20 h-14 rounded-lg overflow-hidden shrink-0 border-2 transition-colors ${
-                i === activeIdx ? 'border-[#e8b84b]' : 'border-transparent hover:border-gray-300'
+              className={`relative w-24 h-16 rounded-lg overflow-hidden shrink-0 transition-opacity ${
+                i === activeIdx ? 'opacity-100' : 'opacity-60 hover:opacity-100'
               }`}
+              aria-label={`Photo ${i + 1}`}
             >
-              <Image src={img} alt={`${alt} ${i + 1}`} fill className="object-cover" sizes="80px" />
+              <Image src={img} alt={`${alt} ${i + 1}`} fill className="object-cover" sizes="96px" />
             </button>
           ))}
         </div>
@@ -77,28 +80,36 @@ export function CarGallery({ images, alt }: CarGalleryProps) {
       {/* Lightbox */}
       {lightbox && (
         <div
-          className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center"
+          className="fixed inset-0 bg-[#0B1220]/95 z-50 flex items-center justify-center"
           onClick={() => setLightbox(false)}
         >
+          {images.length > 1 && (
+            <div className="absolute top-4 left-1/2 -translate-x-1/2 text-white/80 text-sm tabular-nums">
+              {activeIdx + 1} / {images.length}
+            </div>
+          )}
           <button
             className="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/10 text-white flex items-center justify-center hover:bg-white/20"
             onClick={() => setLightbox(false)}
+            aria-label="Close"
           >
-            <X size={20} />
+            <X size={20} strokeWidth={1.5} />
           </button>
           {images.length > 1 && (
             <>
               <button
                 onClick={(e) => { e.stopPropagation(); prev() }}
                 className="absolute left-4 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-white/10 text-white flex items-center justify-center hover:bg-white/20"
+                aria-label="Previous photo"
               >
-                <ChevronLeft size={22} />
+                <ChevronLeft size={22} strokeWidth={1.5} />
               </button>
               <button
                 onClick={(e) => { e.stopPropagation(); next() }}
                 className="absolute right-4 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-white/10 text-white flex items-center justify-center hover:bg-white/20"
+                aria-label="Next photo"
               >
-                <ChevronRight size={22} />
+                <ChevronRight size={22} strokeWidth={1.5} />
               </button>
             </>
           )}

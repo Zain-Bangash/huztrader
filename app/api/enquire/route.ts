@@ -3,7 +3,11 @@ import { createServiceClient } from '@/lib/supabase/server'
 import { Resend } from 'resend'
 
 const resend = new Resend(process.env.RESEND_API_KEY)
-const OWNER_EMAIL = process.env.OWNER_EMAIL ?? ''
+// Comma-separated list of recipients in OWNER_EMAIL — all receive every enquiry
+const OWNER_EMAILS = (process.env.OWNER_EMAIL ?? '')
+  .split(',')
+  .map((e) => e.trim())
+  .filter(Boolean)
 
 function buildEmailHtml(data: Record<string, unknown>, type: string): string {
   const typeLabel = type === 'car_quote' ? 'Car Enquiry' : type === 'import_quote' ? 'Import Quote Request' : 'General Contact'
@@ -67,12 +71,12 @@ export async function POST(request: NextRequest) {
     }
 
     // Send email to owner
-    if (OWNER_EMAIL && process.env.RESEND_API_KEY) {
+    if (OWNER_EMAILS.length && process.env.RESEND_API_KEY) {
       const typeLabel = type === 'car_quote' ? 'Car Enquiry' : type === 'import_quote' ? 'Import Quote Request' : 'General Contact'
 
       const ownerResult = await resend.emails.send({
-        from: 'Your Dealer Website <onboarding@resend.dev>',
-        to: OWNER_EMAIL,
+        from: 'HuzTrader Website <onboarding@resend.dev>',
+        to: OWNER_EMAILS,
         subject: `New ${typeLabel} from ${first_name} ${last_name}`,
         html: buildEmailHtml(body, type),
         replyTo: email,
@@ -86,7 +90,7 @@ export async function POST(request: NextRequest) {
 
       // Confirmation email to visitor
       const visitorResult = await resend.emails.send({
-        from: 'Your Dealer <onboarding@resend.dev>',
+        from: 'HuzTrader <onboarding@resend.dev>',
         to: email,
         subject: `Thanks for your enquiry, ${first_name}!`,
         html: `
@@ -96,8 +100,8 @@ export async function POST(request: NextRequest) {
             </div>
             <div style="padding:24px 32px;background:#fff;color:#374151">
               <p>We&apos;ve received your enquiry and will get back to you within 1 business day.</p>
-              <p>If you need to reach us urgently, call us on <strong>1300 000 000</strong>.</p>
-              <p style="color:#9ca3af;font-size:12px;margin-top:24px">Your Dealer · 123 Your Street, Your Suburb VIC 3000</p>
+              <p>If you need to reach us urgently, call us on <strong>+61 406 799 727</strong>.</p>
+              <p style="color:#9ca3af;font-size:12px;margin-top:24px">Huz Trader</p>
             </div>
           </div>
         `,

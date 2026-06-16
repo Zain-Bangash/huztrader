@@ -152,8 +152,8 @@ export default async function CarDetailPage(props: { params: Promise<{ slug: str
             {/* Contact */}
             <div className="mt-4 bg-mist rounded-xl p-4 text-center">
               <p className="text-sm text-gray-600">Prefer to call?</p>
-              <a href="tel:1300000000" className="font-display text-ink-800 font-bold text-xl hover:text-ink-700 transition-colors tabular-nums">
-                1300 000 000
+              <a href="tel:+61406799727" className="font-display text-ink-800 font-bold text-xl hover:text-ink-700 transition-colors tabular-nums">
+                +61 406 799 727
               </a>
               <p className="text-xs text-gray-400 mt-0.5">Mon–Fri 9:30am–5:30pm</p>
             </div>

@@ -12,7 +12,7 @@ export default function AdminLoginPage() {
             <span className="text-[#1a2744] font-black text-2xl">A</span>
           </div>
           <h1 className="text-white font-bold text-2xl">Admin Panel</h1>
-          <p className="text-gray-400 text-sm mt-1">Your Dealer</p>
+          <p className="text-gray-400 text-sm mt-1">HuzTrader</p>
         </div>
         <AdminLoginForm />
       </div>

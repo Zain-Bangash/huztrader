@@ -44,9 +44,9 @@ export function Navbar() {
     <header className="bg-[#111B2E] text-white sticky top-0 z-50 border-b border-white/10">
       {/* Top bar */}
       <div className="bg-[#0B1220] py-1.5 px-4 text-xs text-gray-300 justify-end items-center gap-4 hidden sm:flex">
-        <a href="tel:1300000000" className="flex items-center gap-1 hover:text-white transition-colors tabular-nums">
+        <a href="tel:+61406799727" className="flex items-center gap-1 hover:text-white transition-colors tabular-nums">
           <Phone size={12} strokeWidth={1.5} />
-          1300 000 000
+          +61 406 799 727
         </a>
         <span>Mon–Fri 9:30am–5:30pm · Sat–Sun by Appointment</span>
       </div>
@@ -56,7 +56,7 @@ export function Navbar() {
         {/* Logo — one-line wordmark */}
         <Link href="/" className="shrink-0">
           <span className="font-display text-xl font-bold tracking-tight text-white">
-            YOUR DEALER<span className="text-[#C9A227]">.</span>
+            HuzTrader<span className="text-[#C9A227]">.</span>
           </span>
         </Link>
 
@@ -130,7 +130,7 @@ export function Navbar() {
           </Link>
           {/* Mobile phone button — phone is otherwise hidden below sm */}
           <a
-            href="tel:1300000000"
+            href="tel:+61406799727"
             className="sm:hidden p-2 text-gray-200 hover:text-white"
             aria-label="Call us"
           >
@@ -182,7 +182,7 @@ export function Navbar() {
               Get A Quote
             </Link>
             <a
-              href="tel:1300000000"
+              href="tel:+61406799727"
               className="flex-1 inline-flex items-center justify-center gap-2 border-[1.5px] border-white/30 text-white text-sm font-semibold px-4 py-3 rounded-md"
             >
               <Phone size={15} strokeWidth={1.5} />

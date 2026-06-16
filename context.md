@@ -40,7 +40,7 @@ A full-stack car dealership website built for a used car dealer + Japanese impor
 car-dealer/
 ├── app/
 │   ├── layout.tsx                  # Root layout — uses PublicLayout wrapper
-│   ├── page.tsx                    # Home page (server component, fetches featured cars)
+│   ├── page.tsx                    # Home page — fetches latest 6 for_sale cars (no is_import filter), shows featured grid
 │   ├── globals.css                 # Global styles, CSS variables (brand colours)
 │   ├── cars/
 │   │   ├── page.tsx                # /cars — full unified car list (ALL cars, no is_import filter)
@@ -162,6 +162,9 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY   # Supabase anon/public key
 SUPABASE_SERVICE_ROLE_KEY       # Supabase service role key (server-only, never expose to client)
 RESEND_API_KEY                  # Resend API key for sending emails
 OWNER_EMAIL                     # Email address that receives all form submissions
+                                # ⚠️ Sandbox restriction: without a verified domain, Resend can only
+                                # deliver to the email used to sign up for Resend. OWNER_EMAIL must
+                                # match that address. Current account: zainhuzaifabusiness@gmail.com
 ```
 
 ---
@@ -174,6 +177,8 @@ OWNER_EMAIL                     # Email address that receives all form submissio
 3. API route inserts row into `enquiries` table (via service role key)
 4. Sends email to `OWNER_EMAIL` via Resend with all details + `replyTo` set to visitor's email
 5. Sends confirmation email to visitor
+   ⚠️ In sandbox mode both emails only deliver if the recipient matches the Resend account email.
+   Errors are now logged to Vercel function logs. Fix: verify a domain in Resend and update `from`.
 
 ### Visitor browses cars
 1. Visits `/cars` (or clicks "Browse All Cars" from the Import A Car dropdown) → sees ALL cars (no is_import filter)
@@ -199,13 +204,28 @@ OWNER_EMAIL                     # Email address that receives all form submissio
 
 ## Brand / Styling
 
-Brand colours (defined in `globals.css` and used as Tailwind arbitrary values throughout):
-- **Navy** `#1a2744` — primary brand colour, nav, buttons, headings
-- **Gold** `#e8b84b` — accent colour, CTAs, highlights
-- **Dark navy** `#0f1a33` — footer, top bar
-- **Light grey** `#f4f5f7` — section backgrounds
+Design tokens are defined in `app/globals.css` as CSS custom properties under `:root`, then exposed to Tailwind v4 via `@theme inline`. Use the token utilities (`bg-ink-800`, `text-gold-500`, etc.) — do not hardcode hex values. To restyle the site, update the hex values in `globals.css`; all Tailwind utilities update automatically.
 
-To rebrand: find/replace `#1a2744`, `#e8b84b`, `#0f1a33`, `#f4f5f7` across the codebase, and update the logo text `YOUR DEALER` in `Navbar.tsx` and `Footer.tsx`.
+**Colour tokens:**
+| Token | Value | Role |
+|---|---|---|
+| `--ink-900` | `#0B1220` | Deepest dark |
+| `--ink-800` | `#111B2E` | Navbar, hero backgrounds, primary brand surface |
+| `--ink-700` | `#1C2A45` | Secondary dark surface |
+| `--gold-500` | `#C9A227` | Accent — see gold discipline below |
+| `--gold-600` | `#B38D1F` | Gold hover state |
+| `--paper` | `#FAFAF8` | Main page background |
+| `--mist` | `#F1F2F0` | Section backgrounds, filter pill backgrounds |
+| `--stone-text` | `#6E7480` | Secondary/muted text |
+| `--hairline` | `#D8DAD5` | Subtle dividers |
+| `--signal-red` | `#B42318` | Sold badge |
+| `--signal-green` | `#067647` | Available indicator |
+
+**Typography:** Archivo (Google Fonts) loaded via `next/font/google` in `app/layout.tsx`, assigned to `--font-display` / `font-display` Tailwind class. Geist Mono used for VIN, stock number, and numeric monospaced fields.
+
+**Gold discipline (critical):** Gold is restricted to: `Button variant="accent"` fill, price displayed on dark backgrounds, and one decorative moment per page (e.g. the timeline line on the import page). Gold must NOT be used on link hovers, eyebrow text, check icons, or thumbnail borders — this is what prevents the "cheap gold trim" look.
+
+**To rebrand:** Update hex values in `:root` in `app/globals.css`, and update the wordmark text `YOUR DEALER.` in `Navbar.tsx`.
 
 ---
 
@@ -236,4 +256,4 @@ To rebrand: find/replace `#1a2744`, `#e8b84b`, `#0f1a33`, `#f4f5f7` across the c
 
 **Add a new form:** Create the form component, POST to `/api/enquire` with appropriate `type` field. The API route handles all three enquiry types generically.
 
-**Deploy a change:** `git push` to `main` — Vercel auto-deploys. No manual steps.
+**Deploy a change:** `git push` to `main` — Vercel auto-deploys to production. ⚠️ Known issue: after commit `a78be66` the production domain (`huztrader.vercel.app`) stopped reflecting new pushes while preview deployments work correctly. If changes don't appear on the production URL, go to Vercel dashboard → Deployments → promote the latest preview deployment to production, or verify the `main` branch is mapped to the production environment.

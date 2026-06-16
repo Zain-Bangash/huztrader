@@ -1,5 +1,5 @@
 import { ContactForm } from '@/components/contact/ContactForm'
-import { Phone, Mail, MapPin, Clock, ExternalLink } from 'lucide-react'
+import { Phone, Mail, Clock } from 'lucide-react'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -28,30 +28,15 @@ export default function ContactPage() {
               <h2 className="font-display text-lg font-semibold text-[#111B2E] mb-5">Dealership</h2>
               <ul className="space-y-5 text-sm">
                 <li className="flex items-start gap-3">
-                  <MapPin size={16} strokeWidth={1.5} className="text-gray-400 shrink-0 mt-0.5" />
-                  <div>
-                    <p className="text-gray-600">123 Your Street, Your Suburb VIC 3000</p>
-                    <a
-                      href="https://www.google.com/maps/search/?api=1&query=123+Your+Street+Your+Suburb+VIC+3000"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="mt-1 inline-flex items-center gap-1 text-[#111B2E] font-medium hover:underline underline-offset-2"
-                    >
-                      Get directions
-                      <ExternalLink size={12} strokeWidth={1.5} />
-                    </a>
-                  </div>
-                </li>
-                <li className="flex items-start gap-3">
                   <Phone size={16} strokeWidth={1.5} className="text-gray-400 shrink-0 mt-1.5" />
-                  <a href="tel:1300000000" className="font-display text-[22px] font-bold text-[#111B2E] hover:text-[#1C2A45] transition-colors tabular-nums">
-                    1300 000 000
+                  <a href="tel:+61406799727" className="font-display text-[22px] font-bold text-[#111B2E] hover:text-[#1C2A45] transition-colors tabular-nums">
+                    +61 406 799 727
                   </a>
                 </li>
                 <li className="flex items-center gap-3">
                   <Mail size={16} strokeWidth={1.5} className="text-gray-400 shrink-0" />
-                  <a href="mailto:contact@yourdomain.com" className="text-gray-600 hover:text-[#111B2E] transition-colors">
-                    contact@yourdomain.com
+                  <a href="mailto:traders.huz@gmail.com" className="text-gray-600 hover:text-[#111B2E] transition-colors">
+                    traders.huz@gmail.com
                   </a>
                 </li>
                 <li className="flex items-start gap-3">

@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Huz Trader - Website Guide</title>
+
+<style>
+:root{
+    --primary:#0f172a;
+    --secondary:#1e293b;
+    --accent:#2563eb;
+    --success:#16a34a;
+    --warning:#f59e0b;
+    --light:#f8fafc;
+    --border:#e2e8f0;
+    --text:#334155;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    background:#f1f5f9;
+    color:var(--text);
+    line-height:1.7;
+}
+
+.container{
+    max-width:1100px;
+    margin:auto;
+    padding:40px 20px;
+}
+
+.hero{
+    background:linear-gradient(135deg,var(--primary),var(--accent));
+    color:white;
+    padding:60px;
+    border-radius:20px;
+    margin-bottom:40px;
+    box-shadow:0 15px 40px rgba(0,0,0,.15);
+}
+
+.hero h1{
+    font-size:3rem;
+    margin-bottom:15px;
+}
+
+.hero p{
+    font-size:1.15rem;
+    opacity:.95;
+}
+
+.section{
+    background:white;
+    padding:35px;
+    border-radius:18px;
+    margin-bottom:25px;
+    box-shadow:0 4px 15px rgba(0,0,0,.05);
+}
+
+.section h2{
+    color:var(--primary);
+    margin-bottom:20px;
+    padding-bottom:10px;
+    border-bottom:3px solid var(--border);
+}
+
+.section h3{
+    color:var(--accent);
+    margin:25px 0 10px;
+}
+
+.card-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:20px;
+    margin-top:20px;
+}
+
+.card{
+    background:var(--light);
+    border:1px solid var(--border);
+    border-radius:14px;
+    padding:20px;
+}
+
+.card h4{
+    color:var(--primary);
+    margin-bottom:10px;
+}
+
+ul, ol{
+    padding-left:25px;
+    margin-top:10px;
+}
+
+li{
+    margin-bottom:8px;
+}
+
+.step{
+    background:#f8fafc;
+    border-left:5px solid var(--accent);
+    padding:18px;
+    margin:15px 0;
+    border-radius:8px;
+}
+
+.callout{
+    background:#eff6ff;
+    border-left:5px solid var(--accent);
+    padding:16px;
+    margin:20px 0;
+    border-radius:8px;
+}
+
+.warning{
+    background:#fff7ed;
+    border-left:5px solid var(--warning);
+}
+
+.success{
+    background:#f0fdf4;
+    border-left:5px solid var(--success);
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:20px;
+}
+
+th{
+    background:var(--primary);
+    color:white;
+    text-align:left;
+    padding:14px;
+}
+
+td{
+    padding:14px;
+    border-bottom:1px solid var(--border);
+}
+
+tr:nth-child(even){
+    background:#f8fafc;
+}
+
+.code{
+    background:#0f172a;
+    color:#f8fafc;
+    padding:12px;
+    border-radius:8px;
+    font-family:monospace;
+    overflow:auto;
+    margin-top:10px;
+}
+
+.footer{
+    text-align:center;
+    color:#64748b;
+    margin-top:30px;
+    padding:20px;
+}
+
+.badge{
+    display:inline-block;
+    background:var(--accent);
+    color:white;
+    padding:6px 12px;
+    border-radius:999px;
+    font-size:.85rem;
+    margin-bottom:10px;
+}
+
+@media (max-width:768px){
+    .hero{
+        padding:40px 25px;
+    }
+
+    .hero h1{
+        font-size:2.2rem;
+    }
+
+    .section{
+        padding:25px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="hero">
+        <span class="badge">User Guide</span>
+        <h1>Huz Trader Website Guide</h1>
+        <p>
+            Welcome! This guide explains how to use the Huz Trader website —
+            both as a visitor browsing cars and as the administrator managing inventory.
+        </p>
+    </div>
+
+    <div class="section">
+        <h2>🚗 For Visitors — Browsing the Website</h2>
+
+        <h3>What can visitors do?</h3>
+
+        <div class="card-grid">
+            <div class="card">
+                <h4>Browse Cars</h4>
+                <p>View all available vehicles with photos, pricing, and specifications.</p>
+            </div>
+
+            <div class="card">
+                <h4>Recently Sold</h4>
+                <p>See vehicles that have already been sold.</p>
+            </div>
+
+            <div class="card">
+                <h4>Car Enquiries</h4>
+                <p>Contact Huz Trader regarding a specific vehicle.</p>
+            </div>
+
+            <div class="card">
+                <h4>Import Requests</h4>
+                <p>Request a quote to source a vehicle directly from Japan.</p>
+            </div>
+
+            <div class="card">
+                <h4>General Contact</h4>
+                <p>Send questions through the website contact page.</p>
+            </div>
+        </div>
+
+        <h3>How does enquiring work?</h3>
+
+        <div class="step">
+            <ol>
+                <li>The visitor clicks <strong>Enquire</strong> on a vehicle.</li>
+                <li>They enter their name, email, phone number, and message.</li>
+                <li>The enquiry is submitted.</li>
+            </ol>
+        </div>
+
+        <div class="success">
+            <strong>What happens next?</strong>
+            <ol>
+                <li>You receive an email containing the enquiry.</li>
+                <li>The customer receives a confirmation email.</li>
+                <li>The enquiry is stored in the admin panel.</li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>🔐 For the Admin — Managing Your Website</h2>
+
+        <h3>How to log in</h3>
+
+        <ol>
+            <li>Go to your website and add <strong>/admin/login</strong> to the URL.</li>
+            <li>Enter your email and password.</li>
+            <li>Click <strong>Sign In</strong>.</li>
+        </ol>
+
+        <div class="code">
+https://huztrader.vercel.app/admin/login
+        </div>
+
+        <div class="callout">
+            After signing in, you'll be taken to the <strong>Cars Management</strong> page.
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>➕ How to Add a Car</h2>
+
+        <ol>
+            <li>Click the <strong>Add Car</strong> button in the admin panel.</li>
+            <li>Complete the vehicle details.</li>
+            <li>Upload photos.</li>
+            <li>Click <strong>Add Car</strong> to publish immediately.</li>
+        </ol>
+
+        <h3>Basic Information</h3>
+
+        <ul>
+            <li><strong>Make:</strong> Toyota</li>
+            <li><strong>Model:</strong> Supra</li>
+            <li><strong>Variant:</strong> GR Sport / Turbo</li>
+            <li><strong>Year:</strong> 2020</li>
+            <li><strong>Status:</strong> For Sale</li>
+            <li><strong>Price:</strong> 45000</li>
+            <li><strong>Mileage:</strong> 35000 km</li>
+            <li><strong>Stock #:</strong> S001 (optional)</li>
+        </ul>
+
+        <h3>Specifications</h3>
+
+        <ul>
+            <li>Body Type</li>
+            <li>Transmission</li>
+            <li>Fuel Type</li>
+            <li>Colour</li>
+            <li>VIN (optional)</li>
+            <li>Import Vehicle Checkbox</li>
+        </ul>
+
+        <h3>Description</h3>
+        <p>
+            Include features, service history, condition details, and any
+            additional information buyers should know.
+        </p>
+
+        <h3>Photos</h3>
+
+        <ul>
+            <li>Upload one or more images.</li>
+            <li>The first image becomes the listing cover photo.</li>
+            <li>Additional photos appear in the vehicle gallery.</li>
+            <li>Hover and click ✕ to remove a photo.</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>✏️ How to Edit a Car</h2>
+
+        <ol>
+            <li>Navigate to <strong>Admin → Cars</strong>.</li>
+            <li>Click the pencil icon.</li>
+            <li>Update the information.</li>
+            <li>Click <strong>Save Changes</strong>.</li>
+        </ol>
+    </div>
+
+    <div class="section">
+        <h2>✅ How to Mark a Car as Sold</h2>
+
+        <ol>
+            <li>Go to <strong>Admin → Cars</strong>.</li>
+            <li>Edit the vehicle.</li>
+            <li>Change Status from <strong>For Sale</strong> to <strong>Sold</strong>.</li>
+            <li>Click <strong>Save Changes</strong>.</li>
+        </ol>
+
+        <div class="success">
+            <strong>Result:</strong>
+            <ul>
+                <li>The vehicle disappears from Cars For Sale.</li>
+                <li>It automatically appears on the Recently Sold page.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>🗑️ How to Delete a Car</h2>
+
+        <ol>
+            <li>Go to <strong>Admin → Cars</strong>.</li>
+            <li>Click the bin icon.</li>
+            <li>Confirm deletion.</li>
+        </ol>
+
+        <div class="warning">
+            <strong>Warning:</strong> Deleting a vehicle is permanent. If you only
+            want to remove it temporarily, change its status to
+            <strong>Reserved</strong> instead.
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>📧 How to View Enquiries</h2>
+
+        <ol>
+            <li>Go to <strong>Admin → Enquiries</strong>.</li>
+            <li>View enquiries ordered from newest to oldest.</li>
+            <li>Click an email address to reply directly.</li>
+        </ol>
+
+        <h3>Each enquiry includes:</h3>
+
+        <ul>
+            <li>Customer name</li>
+            <li>Email address</li>
+            <li>Phone number</li>
+            <li>Message</li>
+            <li>Vehicle details (if applicable)</li>
+            <li>Budget and location (for import requests)</li>
+        </ul>
+
+        <div class="callout">
+            You also receive every enquiry by email immediately after submission.
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>🚪 How to Sign Out</h2>
+
+        <p>Click <strong>Sign Out</strong> at the bottom of the left sidebar.</p>
+    </div>
+
+    <div class="section">
+        <h2>⚡ Quick Reference</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Task</th>
+                    <th>Where to Go</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Add a new car</td>
+                    <td>Admin → Cars → Add Car</td>
+                </tr>
+                <tr>
+                    <td>Edit details or photos</td>
+                    <td>Admin → Cars → Pencil Icon</td>
+                </tr>
+                <tr>
+                    <td>Mark as Sold</td>
+                    <td>Edit → Change Status → Sold</td>
+                </tr>
+                <tr>
+                    <td>View enquiries</td>
+                    <td>Admin → Enquiries</td>
+                </tr>
+                <tr>
+                    <td>Sign out</td>
+                    <td>Bottom of Sidebar</td>
+                </tr>
+                <tr>
+                    <td>Public Website</td>
+                    <td>View Site Button</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="section">
+        <h2>💡 Tips</h2>
+
+        <ul>
+            <li>
+                <strong>Photos Matter:</strong> Aim for 5–8 clear photos showing
+                exterior, interior, engine bay, and notable features.
+            </li>
+
+            <li>
+                <strong>Prices:</strong> Enter numbers only.
+                Example: <strong>45000</strong> not <strong>$45,000</strong>.
+            </li>
+
+            <li>
+                <strong>Descriptions:</strong> Include service history,
+                roadworthy information, recent work, and finance options.
+            </li>
+
+            <li>
+                <strong>Replying:</strong> Simply reply to enquiry emails and
+                your response goes directly to the customer.
+            </li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>🛠 Something Not Working?</h2>
+
+        <p>Contact the developer and provide:</p>
+
+        <ol>
+            <li>What you were trying to do</li>
+            <li>What happened instead</li>
+            <li>A screenshot if possible</li>
+        </ol>
+    </div>
+
+    <div class="footer">
+        Huz Trader Website Guide © 2026
+    </div>
+
+</div>
+
+</body>
+</html>

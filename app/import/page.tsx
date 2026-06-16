@@ -229,8 +229,8 @@ export default async function ImportPage() {
 
               <div className="mt-8">
                 <p className="text-sm text-gray-500">Prefer to talk it through?</p>
-                <a href="tel:1300000000" className="font-display text-xl font-bold text-[#111B2E] hover:text-[#1C2A45] transition-colors tabular-nums">
-                  1300 000 000
+                <a href="tel:+61406799727" className="font-display text-xl font-bold text-[#111B2E] hover:text-[#1C2A45] transition-colors tabular-nums">
+                  +61 406 799 727
                 </a>
               </div>
             </div>

@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { Phone, Mail, MapPin, Clock } from 'lucide-react'
+import { Phone, Mail, Clock } from 'lucide-react'
 
 const exploreLinks = [
   ['Cars For Sale', '/cars'],
@@ -20,7 +20,7 @@ export function Footer() {
           <div>
             <div className="mb-3">
               <span className="font-display text-xl font-bold tracking-tight text-white">
-                YOUR DEALER<span className="text-[#C9A227]">.</span>
+                HuzTrader<span className="text-[#C9A227]">.</span>
               </span>
               <p className="text-[10px] text-gray-500 tracking-widest uppercase mt-1">Premium Automotive</p>
             </div>
@@ -28,10 +28,10 @@ export function Footer() {
               Family operated dealership specialising in quality used vehicles and Japanese car imports. Trusted by hundreds of happy customers.
             </p>
             <a
-              href="tel:1300000000"
+              href="tel:+61406799727"
               className="mt-5 inline-block font-display text-2xl font-bold text-white hover:text-gray-200 transition-colors tabular-nums"
             >
-              1300 000 000
+              +61 406 799 727
             </a>
             <p className="text-sm mt-4 text-gray-400">
               <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
@@ -62,24 +62,13 @@ export function Footer() {
           <div>
             <h3 className="text-white font-semibold mb-4 text-xs uppercase tracking-[0.12em]">Contact</h3>
             <ul className="space-y-3 text-sm">
-              <li className="flex items-start gap-2.5">
-                <MapPin size={15} strokeWidth={1.5} className="text-gray-400 shrink-0 mt-0.5" />
-                <a
-                  href="https://www.google.com/maps/search/?api=1&query=123+Your+Street+Your+Suburb+VIC+3000"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-white transition-colors"
-                >
-                  123 Your Street, Your Suburb VIC 3000
-                </a>
-              </li>
               <li className="flex items-center gap-2.5">
                 <Phone size={15} strokeWidth={1.5} className="text-gray-400 shrink-0" />
-                <a href="tel:1300000000" className="hover:text-white transition-colors tabular-nums">1300 000 000</a>
+                <a href="tel:+61406799727" className="hover:text-white transition-colors tabular-nums">+61 406 799 727</a>
               </li>
               <li className="flex items-center gap-2.5">
                 <Mail size={15} strokeWidth={1.5} className="text-gray-400 shrink-0" />
-                <a href="mailto:contact@yourdomain.com" className="hover:text-white transition-colors">contact@yourdomain.com</a>
+                <a href="mailto:traders.huz@gmail.com" className="hover:text-white transition-colors">traders.huz@gmail.com</a>
               </li>
               <li className="flex items-start gap-2.5">
                 <Clock size={15} strokeWidth={1.5} className="text-gray-400 shrink-0 mt-0.5" />
@@ -92,7 +81,7 @@ export function Footer() {
 
       <div className="border-t border-white/10 py-4">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-gray-500">
-          <span>© {new Date().getFullYear()} Your Dealer. All rights reserved.</span>
+          <span>© {new Date().getFullYear()} HuzTrader. All rights reserved.</span>
           <span>Licensed Motor Car Trader · LMCT 00000</span>
         </div>
       </div>

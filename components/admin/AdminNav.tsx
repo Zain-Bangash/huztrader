@@ -30,7 +30,7 @@ export function AdminNav() {
           </div>
           <div>
             <div className="font-bold text-sm">Admin Panel</div>
-            <div className="text-[10px] text-gray-400">Your Dealer</div>
+            <div className="text-[10px] text-gray-400">HuzTrader</div>
           </div>
         </div>
       </div>

@@ -60,7 +60,6 @@ You'll land on the **Cars** management page.
    **Specifications**
    - Body Type, Transmission, Fuel Type, Colour — select from the dropdown menus
    - VIN — the vehicle identification number (optional)
-   - **Import checkbox** — tick this if the car is an importable model (shows in the import catalogue rather than the for-sale page)
 
    **Description**
    - Write anything you want visitors to know — features, condition, service history, etc.
@@ -119,6 +118,8 @@ The car will:
 4. Click the **email address** to open a reply in your email app
 
 > 💡 You also receive every enquiry by email as soon as it's submitted — you don't need to check this page regularly.
+>
+> ⚠️ **Email sandbox note:** Until a custom domain is verified in Resend, emails can only be delivered to the address used to sign up for Resend (`zainhuzaifabusiness@gmail.com`). Enquiry confirmation emails to visitors will not send in sandbox mode. To fix: verify a domain in your Resend account and update the `from` address.
 
 ---
 

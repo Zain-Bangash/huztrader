@@ -20,8 +20,8 @@ const archivo = Archivo({
 
 export const metadata: Metadata = {
   title: {
-    default: "Your Dealer | Premium Used Cars & Japanese Imports",
-    template: "%s | Your Dealer",
+    default: "HuzTrader",
+    template: "%s | HuzTrader",
   },
   description: "Family operated used car dealership specialising in quality vehicles and Japanese imports. Browse our inventory or get a free import quote today.",
 };

@@ -55,7 +55,7 @@ export function Navbar() {
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-[72px]">
         {/* Logo — one-line wordmark */}
         <Link href="/" className="shrink-0">
-          <span className="font-display text-xl font-bold tracking-tight text-white">
+          <span className="font-display text-2xl font-bold tracking-tight text-white">
             HuzTrader<span className="text-[#C9A227]">.</span>
           </span>
         </Link>

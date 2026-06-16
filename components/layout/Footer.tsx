@@ -19,7 +19,7 @@ export function Footer() {
           {/* Brand */}
           <div>
             <div className="mb-3">
-              <span className="font-display text-xl font-bold tracking-tight text-white">
+              <span className="font-display text-2xl font-bold tracking-tight text-white">
                 HuzTrader<span className="text-[#C9A227]">.</span>
               </span>
               <p className="text-[10px] text-gray-500 tracking-widest uppercase mt-1">Premium Automotive</p>

@@ -123,6 +123,20 @@ The car will:
 
 ---
 
+### How to delete enquiries
+
+On the **Admin → Enquiries** page you can remove enquiries you no longer need:
+
+- **Delete one** — click the bin icon in the top-right corner of any single enquiry.
+- **Delete several** — tick the checkbox on each enquiry you want to remove, then click **"Delete selected"** at the top. Tip: tick **"Select all"** first, then untick the few you want to keep, and "Delete selected" will clear the rest.
+- **Delete everything** — click the red **"Delete all"** button at the top to wipe every enquiry at once.
+
+Every option asks you to confirm first, and tells you exactly how many will be removed.
+
+> ⚠️ Deleting an enquiry is permanent — it only removes it from this dashboard. You'll still have the original email copy in your inbox.
+
+---
+
 ### How to sign out
 
 Click **"Sign Out"** at the bottom of the left sidebar.
@@ -137,6 +151,7 @@ Click **"Sign Out"** at the bottom of the left sidebar.
 | Edit a car's details or photos | Admin → Cars → pencil icon |
 | Mark a car as sold | Admin → Cars → edit → change Status to Sold |
 | View customer enquiries | Admin → Enquiries |
+| Delete enquiries (one, several, or all) | Admin → Enquiries → bin icon / checkboxes / Delete all |
 | Sign out | Bottom of the left sidebar |
 | Your website (public view) | Click "View Site" at the bottom of the sidebar |
 | Browse all cars (visitor view) | Header → Cars For Sale, or Import A Car → Browse All Cars |

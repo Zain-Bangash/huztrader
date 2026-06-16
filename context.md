@@ -58,12 +58,16 @@ car-dealer/
 │   │   │   ├── page.tsx            # List all cars
 │   │   │   ├── new/page.tsx        # Add new car
 │   │   │   └── [id]/page.tsx       # Edit existing car
-│   │   └── enquiries/page.tsx      # View all form submissions
+│   │   └── enquiries/page.tsx      # View all form submissions (delete single + bulk)
 │   └── api/
 │       ├── enquire/route.ts        # POST: save enquiry to Supabase + email via Resend
-│       └── admin/cars/
-│           ├── route.ts            # POST: create car (auth required)
-│           └── [id]/route.ts       # PUT: update car, DELETE: delete car (auth required)
+│       └── admin/
+│           ├── cars/
+│           │   ├── route.ts        # POST: create car (auth required)
+│           │   └── [id]/route.ts   # PUT: update car, DELETE: delete car (auth required)
+│           └── enquiries/
+│               ├── route.ts        # DELETE: bulk delete by { ids } or { all: true } (auth required)
+│               └── [id]/route.ts   # DELETE: delete single enquiry (auth required)
 │
 ├── components/
 │   ├── layout/
@@ -84,7 +88,8 @@ car-dealer/
 │   │   ├── AdminNav.tsx            # Admin sidebar navigation
 │   │   ├── AdminLoginForm.tsx      # Supabase Auth login form
 │   │   ├── AdminCarTable.tsx       # Searchable table of all cars with edit/delete
-│   │   └── AdminCarForm.tsx        # Add/edit car form with Supabase Storage photo upload
+│   │   ├── AdminCarForm.tsx        # Add/edit car form with Supabase Storage photo upload
+│   │   └── AdminEnquiriesList.tsx  # Client list of enquiries: per-row delete + select-all/bulk delete
 │   └── ui/
 │       ├── button.tsx              # Button component (variants: primary, outline, accent, ghost, danger)
 │       ├── input.tsx               # Input component
@@ -225,7 +230,9 @@ Design tokens are defined in `app/globals.css` as CSS custom properties under `:
 
 **Gold discipline (critical):** Gold is restricted to: `Button variant="accent"` fill, price displayed on dark backgrounds, and one decorative moment per page (e.g. the timeline line on the import page). Gold must NOT be used on link hovers, eyebrow text, check icons, or thumbnail borders — this is what prevents the "cheap gold trim" look.
 
-**To rebrand:** Update hex values in `:root` in `app/globals.css`, and update the wordmark text `YOUR DEALER.` in `Navbar.tsx`.
+**Brand name:** The business is **HuzTrader**. The wordmark renders as `HuzTrader.` (the trailing dot is the gold accent) at `text-2xl` in both `Navbar.tsx` and `Footer.tsx`. The browser tab title is set in `app/layout.tsx` (`default: "HuzTrader"`, `template: "%s | HuzTrader"`).
+
+**To rebrand:** Update hex values in `:root` in `app/globals.css`, and update the wordmark text in `Navbar.tsx` and `Footer.tsx` (plus the title in `app/layout.tsx` and the email `from` names in `app/api/enquire/route.ts`).
 
 ---
 

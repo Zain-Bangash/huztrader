@@ -3,11 +3,7 @@ import { createServiceClient } from '@/lib/supabase/server'
 import { Resend } from 'resend'
 
 const resend = new Resend(process.env.RESEND_API_KEY)
-// Comma-separated list of recipients in OWNER_EMAIL — all receive every enquiry
-const OWNER_EMAILS = (process.env.OWNER_EMAIL ?? '')
-  .split(',')
-  .map((e) => e.trim())
-  .filter(Boolean)
+const OWNER_EMAIL = process.env.OWNER_EMAIL ?? ''
 
 function buildEmailHtml(data: Record<string, unknown>, type: string): string {
   const typeLabel = type === 'car_quote' ? 'Car Enquiry' : type === 'import_quote' ? 'Import Quote Request' : 'General Contact'
@@ -71,12 +67,12 @@ export async function POST(request: NextRequest) {
     }
 
     // Send email to owner
-    if (OWNER_EMAILS.length && process.env.RESEND_API_KEY) {
+    if (OWNER_EMAIL && process.env.RESEND_API_KEY) {
       const typeLabel = type === 'car_quote' ? 'Car Enquiry' : type === 'import_quote' ? 'Import Quote Request' : 'General Contact'
 
       const ownerResult = await resend.emails.send({
         from: 'HuzTrader Website <onboarding@resend.dev>',
-        to: OWNER_EMAILS,
+        to: OWNER_EMAIL,
         subject: `New ${typeLabel} from ${first_name} ${last_name}`,
         html: buildEmailHtml(body, type),
         replyTo: email,

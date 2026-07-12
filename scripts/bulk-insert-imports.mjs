@@ -18,7 +18,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url))
 
 // ─── Config ───────────────────────────────────────────────────────────────────
 const SUPABASE_URL      = 'https://fwmmqpmtukvnweukddxe.supabase.co'
-const SERVICE_ROLE_KEY  = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ3bW1xcG10dWt2bndldWtkZHhlIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc4MDkwNDYwOSwiZXhwIjoyMDk2NDgwNjA5fQ.bSqPnkIz04d6sCjnAL0UhF5GrU3QBaJkK1_DrG2Dknw'
+const SERVICE_ROLE_KEY  = process.env.SUPABASE_SERVICE_ROLE_KEY
 const BATCH_SIZE        = 20   // rows per upsert call
 const INPUT_FILE        = join(__dirname, 'import-catalogue.json')
 
